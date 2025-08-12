@@ -46,8 +46,8 @@ courier_menu = """
 kitchen_menu = """
     1. Add food
     2. Order preparation
-    3. Ready orders
-    4. Unfinished order
+    3. Show Ready orders
+    4. SHow Unfinished order
 """
 
 def get_user_option(menu: str, max_option: int):

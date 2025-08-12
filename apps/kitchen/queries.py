@@ -9,3 +9,26 @@ class KitchenQueries:
         """
         execute_query(query, (kitchen_name, food_name, price, quantity))
     
+        
+    @staticmethod
+    def get_pending_orders(kitchen_name):
+        query = """
+            SELECT o.id, f.food_name, f.price, o.status
+            FROM orders o
+            JOIN foods f ON o.food_id = f.id
+            WHERE o.status = 'pending'
+            AND f.kitchen_name = %s
+        """
+        return execute_query(query, (kitchen_name,), fetch=True)
+
+    
+    @staticmethod
+    def get_ready_orders(kitchen_name):
+        query = """
+            SELECT o.id, f.food_name, f.price, o.status
+            FROM orders o
+            JOIN foods f ON o.food_id = f.id
+            WHERE o.status = 'ready'
+            AND f.kitchen_name = %s
+        """
+        return execute_query(query, (kitchen_name,), fetch=True)

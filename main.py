@@ -37,7 +37,7 @@ class Menu:
         if option == "1":
             UserViews().ordering_food()
         elif option == "2":
-            ...
+            UserViews().show_orders()
         elif option == "3":
             return LogoutView().logout_all()
         return self.user_menu()
@@ -61,13 +61,15 @@ class Menu:
         return self.admin_menu()
 
     def kitchen_menu(self):
-        option = get_user_option(menu=kitchen_menu, max_option=3)
+        option = get_user_option(menu=kitchen_menu, max_option=4)
         if option == "1":
             KitchenFunc().add_foods()
         elif option == "2":
-            ...
+            KitchenFunc()
         elif option == "3":
-            ...
+            KitchenFunc().show_pending_orders()
+        elif option == "4":
+            KitchenFunc().show_ready_orders()
         return self.admin_menu()
 
     def courier_menu(self):

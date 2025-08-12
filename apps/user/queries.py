@@ -16,3 +16,12 @@ class UserQueries:
     def insert_order(food_id):
         query = "INSERT INTO orders (food_id, status) VALUES (%s, 'pending')"
         execute_query(query, (food_id,))
+
+    
+    @staticmethod
+    def show_orders_query():
+        query = """
+        SELECT * FROM orders;
+        """
+        orders = execute_query(query, fetch="all")
+        return orders

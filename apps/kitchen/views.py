@@ -16,3 +16,27 @@ class KitchenFunc(KitchenQueries):
 
         KitchenQueries.insert_product(self.kitchen_name, self.food_name, self.price, self.quantity)
         print(f"'{self.food_name}' successfully added ✅")
+    
+    
+    def show_pending_orders(self, kitchen_name):
+        orders = KitchenQueries.get_pending_orders(kitchen_name)
+        
+        if not orders:
+            print("Sizda hozircha yangi buyurtma yo'q.")
+            return
+        
+        print(f"\n{kitchen_name} oshxonasidagi PENDING buyurtmalar:")
+        for order in orders:
+            print(f"{order['id']}. {order['food_name']} - {order['price']} so'm (status: {order['status']})")
+
+    
+    def show_ready_orders(self, kitchen_name):
+        orders = KitchenQueries.get_ready_orders(kitchen_name)
+        
+        if not orders:
+            print("Tayyor buyurtmalar yo'q.")
+            return
+        
+        print(f"{kitchen_name} oshxonasidagi READY buyurtmalar:")
+        for order in orders:
+            print(f"{order['id']}. {order['food_name']} - {order['price']} so'm (status: {order['status']})")
