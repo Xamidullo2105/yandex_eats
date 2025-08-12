@@ -1,7 +1,6 @@
 import logging
 from apps.user.views import UserViews
 from apps.auth.views import RegisterView, LogoutView, LoginView
-from core.utils import main_menu, get_user_option, execute_tables
 from core.utils import main_menu, get_user_option, execute_tables, user_menu, admin_menu, kitchen_menu, courier_menu
 from apps.admin.views import AdminViews
 from apps.kitchen.views import KitchenFunc
@@ -44,24 +43,27 @@ class Menu:
         return self.user_menu()
 
     def admin_menu(self):
-        option = get_user_option(menu=admin_menu, max_option=5)
+        option = get_user_option(menu=admin_menu, max_option=7)
         if option == "1":
-            AdminViews().add_couriers()
+            AdminViews(role="courier").add_couriers()
         elif option == "2":
-            AdminViews().add_restorans()
+            AdminViews(role="kitchen").add_kitchen()
         elif option == "3":
-            ...
+            AdminViews(role="courier").delete_courier()
         elif option == "4":
-            ...
+            AdminViews(role="kitchen").delete_kitchen()
         elif option == "5":
-            LogoutView().logout_all()
+            AdminViews(role="courier").show_couriers()
+        elif option == "6":
+            AdminViews(role="kitchen").show_kitchens()
+        elif option == "7":
             return self.main_menu()
         return self.admin_menu()
 
     def kitchen_menu(self):
         option = get_user_option(menu=kitchen_menu, max_option=3)
         if option == "1":
-            KitchenFunc().add_products()
+            KitchenFunc().add_foods()
         elif option == "2":
             ...
         elif option == "3":

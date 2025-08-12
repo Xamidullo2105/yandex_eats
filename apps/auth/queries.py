@@ -20,7 +20,7 @@ class AuthQueries:
 
 
     @staticmethod
-    def get_courier_by_user_id(email) -> dict | None:
+    def get_courier_by_email(email) -> dict | None:
         query = "SELECT * FROM couriers WHERE email = %s"
         params = (email,)
         courier = execute_query(query=query, params=params, fetch="one")
@@ -41,6 +41,39 @@ class AuthQueries:
         params = (True, email,)
         execute_query(query=query, params=params)
         return True
+    
+    
+    @staticmethod
+    def update_courier_role(email, role) -> bool:
+        query = "UPDATE couriers SET role = %s WHERE email = %s"
+        params = (role, email)
+        execute_query(query=query, params=params)
+        return True
+    
+    
+    @staticmethod
+    def update_courier_is_login(email):
+        query = "UPDATE couriers SET is_login = %s WHERE email = %s"
+        params = (True, email,)
+        execute_query(query=query, params=params)
+        return True
+    
+    
+    @staticmethod
+    def update_kitchen_role(email, role) -> bool:
+        query = "UPDATE kitchens SET role = %s WHERE email = %s"
+        params = (role, email)
+        execute_query(query=query, params=params)
+        return True
+    
+    
+    @staticmethod
+    def update_kitchen_is_login(email):
+        query = "UPDATE kitchens SET is_login = %s WHERE email = %s"
+        params = (True, email,)
+        execute_query(query=query, params=params)
+        return True
+    
 
     @staticmethod
     def get_active_user() -> dict | None:

@@ -111,7 +111,7 @@ class LoginView(AuthQueries):
             print(f"Welcome Kitchen, {kitchen['name']}")
             return "kitchen"
 
-        courier = self.get_courier_by_user_id(email)
+        courier = self.get_courier_by_email(email)
         if courier and courier['password'] == password:
             self.update_courier_is_login(email=email)
             print(f"Welcome Courier, {courier['name']}")

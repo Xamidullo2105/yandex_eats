@@ -21,7 +21,7 @@ user_menu = """
 restaurants = """
     << Restaurant List >>
     
-    1. Optepa
+    1. Oqtepa
     2. Blissimo
     3. Evos
     """
@@ -30,10 +30,11 @@ restaurants = """
 admin_menu = """
     1. Add couries
     2. Add kitchen
-    3. Show kitchen
+    3. Delete courier
     4. Delete kitchen
-    5. Delete courier
-    6. Show courier
+    5. Show courier
+    6. Show kitchen
+    7. Exit 
     """
 
 
@@ -63,12 +64,11 @@ def execute_tables():
     from apps.auth.models import users_query, verification_codes_query
     from apps.courier.models import courier_query
     from apps.kitchen.models import kitchen_query, foods_query
-    from apps.user.models import unfinished_order_query, ready_orders_query
+    from apps.user.models import orders_query
 
     execute_query(query=users_query)
     execute_query(query=verification_codes_query)
     execute_query(query=courier_query)
     execute_query(query=kitchen_query)
     execute_query(query=foods_query)
-    execute_query(query=unfinished_order_query)
-    execute_query(query=ready_orders_query)
+    execute_query(query=orders_query)

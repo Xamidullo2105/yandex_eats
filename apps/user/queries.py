@@ -3,8 +3,16 @@ from core.database import execute_query
 
 class UserQueries:
     @staticmethod
-    def get_foods_by_restaurant_id(restaurant_id):
-        query = "SELECT * FROM foods WHERE restaurant_id = %s"
-        params = (restaurant_id,)
-        foods = execute_query(query=query, params=params, fetch="all")
-        return foods if foods else None
+    def get_foods_by_kitchen(kitchen_name):
+        query = """
+            SELECT id, food_name, price
+            FROM foods
+            WHERE LOWER(kitchen_name) = LOWER(%s)
+        """
+        return execute_query(query, (kitchen_name,), fetch=True)
+    
+    
+    @staticmethod
+    def insert_order(food_id):
+        query = "INSERT INTO orders (food_id, status) VALUES (%s, 'pending')"
+        execute_query(query, (food_id,))
